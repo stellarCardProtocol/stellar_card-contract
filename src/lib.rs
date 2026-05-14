@@ -39,6 +39,8 @@ impl Stellar_CardReceiver {
         env.storage().instance().set(&DataKey::UsdcContract, &usdc_contract);
         env.storage().instance().set(&DataKey::XlmContract, &xlm_contract);
 
+        // Keep instance storage alive to avoid state-eviction surprises on
+        // long-lived deployments with infrequent writes.
         env.storage().instance().extend_ttl(17_280_000, 17_280_000);
     }
 
